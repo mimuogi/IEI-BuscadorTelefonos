@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace IEI_TelefonosBuscar.Connections
 {
-    class ChromeConnection
+    class FirefoxConnection
     {
         private static IWebDriver Driver { get; set; }
 
         public static IWebDriver initConnection(String urlConnection)
         {
-            ChromeOptions options = new ChromeOptions();
+            FirefoxOptions options = new FirefoxOptions();
             options.AddArguments("--start-maximized");
 
-            Driver = new ChromeDriver(options);
+            Driver = new FirefoxDriver();
 
             Driver.Navigate().GoToUrl(urlConnection);
 
             return Driver;
         }
+
     }
 }

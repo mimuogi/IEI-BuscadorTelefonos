@@ -20,24 +20,33 @@ namespace IEI_TelefonosBuscar.WebManagers
 
         public static List<Telefono> Buscar(String marca, String modelo)
         {
-            driver = ChromeConnection.initChromeConnection(urlConnection);
+            driver = ChromeConnection.initConnection(urlConnection);
+
+            List<Telefono> telefonos = new List<Telefono>();
 
             IWebElement cajaBusqueda = driver.FindElement(By.Name("query"));
-            cajaBusqueda.SendKeys(marca + " " + modelo);
+            cajaBusqueda.SendKeys("Móvil " + marca + " " + modelo);
             cajaBusqueda.Submit();
 
             cajaBusqueda.SendKeys(Keys.Enter);
 
             Thread.Sleep(3000);
 
-            IWebElement checkBox = driver.FindElement(By.XPath("html/body/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/ul/li/a"));
-            checkBox.Click();
+            //IWebElement checkBox = driver.FindElement(By.XPath("html/body/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/ul/li/a"));
+            //checkBox.Click();
+            
+            try {
 
-            Thread.Sleep(3000);
+                IWebElement smartphoneCheckBox = driver.FindElement(By.CssSelector("a[data-id='1116']"));
+                smartphoneCheckBox.Click();
+                Thread.Sleep(3000);
+            }
+            catch (Exception e)
+            { 
+                // No hacer nada
+            }
 
             List<IWebElement> elementos = driver.FindElements(By.ClassName("tarjeta-articulo__elementos-basicos")).ToList();
-
-            List<Telefono> telefonos = new List<Telefono>();
             
             foreach (IWebElement elemento in elementos)
             {
@@ -50,7 +59,7 @@ namespace IEI_TelefonosBuscar.WebManagers
                 }
                 catch (Exception e)
                 {
-                     precioOriginal = String.Empty;
+                    precioOriginal = precioActual;
                 }
 
                 Telefono tlf = new Telefono(nombre, precioActual, precioOriginal, web);
