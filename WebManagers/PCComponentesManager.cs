@@ -25,25 +25,23 @@ namespace IEI_TelefonosBuscar.WebManagers
             List<Telefono> telefonos = new List<Telefono>();
 
             IWebElement cajaBusqueda = driver.FindElement(By.Name("query"));
-            cajaBusqueda.SendKeys("Móvil " + marca + " " + modelo);
+            cajaBusqueda.SendKeys("Smartphon " + marca + " " + modelo);
             cajaBusqueda.Submit();
 
             cajaBusqueda.SendKeys(Keys.Enter);
 
             Thread.Sleep(3000);
 
-            //IWebElement checkBox = driver.FindElement(By.XPath("html/body/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/ul/li/a"));
-            //checkBox.Click();
-            
             try {
 
                 IWebElement smartphoneCheckBox = driver.FindElement(By.CssSelector("a[data-id='1116']"));
                 smartphoneCheckBox.Click();
                 Thread.Sleep(3000);
             }
-            catch (Exception e)
-            { 
-                // No hacer nada
+            catch (Exception)
+            {
+                driver.Quit();
+                return telefonos;
             }
 
             List<IWebElement> elementos = driver.FindElements(By.ClassName("tarjeta-articulo__elementos-basicos")).ToList();
@@ -57,13 +55,14 @@ namespace IEI_TelefonosBuscar.WebManagers
                 {
                      precioOriginal = elemento.FindElement(By.ClassName("tarjeta-articulo__pvp")).Text;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     precioOriginal = precioActual;
                 }
 
                 Telefono tlf = new Telefono(nombre, precioActual, precioOriginal, web);
                 telefonos.Add(tlf);
+               
             }
 
             driver.Quit();

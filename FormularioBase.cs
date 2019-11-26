@@ -30,11 +30,14 @@ namespace IEI_TelefonosBuscar
             if(checkBoxAmazon.Checked) listaResultados.AddRange(AmazonManager.Buscar(marca, modelo));
             if(checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
             if(checkBoxPCComp.Checked) listaResultados.AddRange(PCComponentesManager.Buscar(marca, modelo));
-            
-            foreach(Telefono resultado in listaResultados)
+
+            foreach (Telefono resultado in listaResultados)
             {
-                string[] listViewItem = { resultado.Nombre, resultado.Precio, resultado.PrecioOriginal, resultado.Web };
-                listResultView.Items.Add(new ListViewItem(listViewItem));
+                if (pasaFiltro(resultado.Nombre))
+                {
+                    string[] listViewItem = { resultado.Nombre, resultado.Precio, resultado.PrecioOriginal, resultado.Web };
+                    listResultView.Items.Add(new ListViewItem(listViewItem));
+                }
             }
         }
 
@@ -47,6 +50,24 @@ namespace IEI_TelefonosBuscar
         {
             listaResultados.Clear();
             listResultView.Items.Clear();
+        }
+
+        private static bool pasaFiltro(string nombre)
+        {
+            bool pasaFiltroNombre = true;
+            string nombreProducto = nombre.ToLower();
+
+            if (nombreProducto.Contains("funda")
+                || nombreProducto.Contains("cover")
+                || nombreProducto.Contains("protector")
+                || nombreProducto.Contains("protección")
+                || nombreProducto.Contains("pack")
+                || nombreProducto.Contains("templado"))
+            {
+                pasaFiltroNombre = false;
+            }
+
+            return pasaFiltroNombre;
         }
     }
 }
