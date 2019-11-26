@@ -1,5 +1,7 @@
-﻿using IEI_TelefonosBuscar.Data;
+﻿using IEI_TelefonosBuscar.Connections;
+using IEI_TelefonosBuscar.Data;
 using IEI_TelefonosBuscar.WebManagers;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +16,7 @@ namespace IEI_TelefonosBuscar
 {
     public partial class FormularioBase : Form
     {
+        public static IWebDriver driver;
         private List<Telefono> listaResultados = new List<Telefono>();
         public FormularioBase()
         {
@@ -27,9 +30,11 @@ namespace IEI_TelefonosBuscar
             string marca = marcaBox.Text;
             string modelo = textBoxModelo.Text;
 
-            if(checkBoxAmazon.Checked) listaResultados.AddRange(AmazonManager.Buscar(marca, modelo));
-            if(checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
-            if(checkBoxPCComp.Checked) listaResultados.AddRange(PCComponentesManager.Buscar(marca, modelo));
+            if (checkBoxAmazon.Checked && checkBoxFnac.Checked && checkBoxPCComp.Checked) Espectaculo();
+
+            if (checkBoxAmazon.Checked) listaResultados.AddRange(AmazonManager.Buscar(marca, modelo));
+            if (checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
+            if (checkBoxPCComp.Checked) listaResultados.AddRange(PCComponentesManager.Buscar(marca, modelo));
 
             foreach (Telefono resultado in listaResultados)
             {
@@ -39,6 +44,8 @@ namespace IEI_TelefonosBuscar
                     listResultView.Items.Add(new ListViewItem(listViewItem));
                 }
             }
+
+            driver.Quit();
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -68,6 +75,16 @@ namespace IEI_TelefonosBuscar
             }
 
             return pasaFiltroNombre;
+        }
+
+        public static void Espectaculo() 
+        {
+            string urlLaDonnaEMobile = "https://www.youtube.com/watch?v=xCFEk6Y8TmM";
+
+            driver = FirefoxConnection.initConnection(urlLaDonnaEMobile);
+            driver.Manage().Window.Minimize();
+            driver.FindElement(By.CssSelector("button[class='ytp-large-play-button ytp-button']")).Click();
+
         }
     }
 }

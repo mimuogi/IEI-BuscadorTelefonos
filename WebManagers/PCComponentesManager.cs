@@ -24,13 +24,13 @@ namespace IEI_TelefonosBuscar.WebManagers
 
             List<Telefono> telefonos = new List<Telefono>();
 
+            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.Name("query"));
+
             IWebElement cajaBusqueda = driver.FindElement(By.Name("query"));
             cajaBusqueda.SendKeys("Smartphon " + marca + " " + modelo);
-            cajaBusqueda.Submit();
-
             cajaBusqueda.SendKeys(Keys.Enter);
 
-            Thread.Sleep(3000);
+            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 3), By.CssSelector("a[data-id='1116']"));
 
             try {
 
@@ -43,6 +43,8 @@ namespace IEI_TelefonosBuscar.WebManagers
                 driver.Quit();
                 return telefonos;
             }
+
+            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 3), By.ClassName("tarjeta-articulo__elementos-basicos"));
 
             List<IWebElement> elementos = driver.FindElements(By.ClassName("tarjeta-articulo__elementos-basicos")).ToList();
             

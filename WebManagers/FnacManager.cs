@@ -4,9 +4,6 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace IEI_TelefonosBuscar.WebManagers
 {
@@ -22,19 +19,22 @@ namespace IEI_TelefonosBuscar.WebManagers
         {
             driver = ChromeConnection.initConnection(urlConnection);
 
-            Thread.Sleep(3000);
+            List<Telefono> telefonos = new List<Telefono>();
+
+            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.Name("Search"));
 
             IWebElement cajaBusqueda = driver.FindElement(By.Name("Search"));
             cajaBusqueda.SendKeys(marca + " " + modelo);
             cajaBusqueda.Submit();
 
+            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.CssSelector("span[data-category='8!1,8020!2']"));
+
             IWebElement smartphoneCheck = driver.FindElement(By.CssSelector("span[data-category='8!1,8020!2']"));
             smartphoneCheck.Click();
 
-            Thread.Sleep(3000);
-            
+            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.ClassName("Article-item"));
+
             List<IWebElement> elementos = driver.FindElements(By.ClassName("Article-item")).ToList();
-            List<Telefono> telefonos = new List<Telefono>();
 
             foreach(IWebElement elemento in elementos)
             {
@@ -45,12 +45,12 @@ namespace IEI_TelefonosBuscar.WebManagers
                 try {
                      precioActual = elemento.FindElement(By.CssSelector("span[class='price']")).Text;
                 }
-                catch (Exception e) {
+                catch (Exception ) {
                     try
                     {
                         precioActual = elemento.FindElement(By.CssSelector("strong[class='userPrice']")).Text;
                     }
-                    catch (Exception ex) { 
+                    catch (Exception) { 
                     
                     }
                 }
@@ -58,7 +58,7 @@ namespace IEI_TelefonosBuscar.WebManagers
                 {
                     precioOriginal = elemento.FindElement(By.CssSelector("del[class='oldPrice']")).Text;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     precioOriginal = precioActual;
                 }
