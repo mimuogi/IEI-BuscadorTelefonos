@@ -66,7 +66,7 @@ namespace IEI_TelefonosBuscar.WebManagers
                 telefonos.Add(tlf);
             }
 
-            driver.Close();
+            driver.Quit();
 
             return telefonos;
         }
