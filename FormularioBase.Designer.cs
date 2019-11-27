@@ -40,10 +40,16 @@
             this.columnaProducto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioActual = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioOriginal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnaWeb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaPrecioAmazon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clearButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.columnaPrecioOriginalAmazon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaPrecioFnac = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaPrecioOriginalFnac = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaPrecioPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaPrecioOriginalPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaWeb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -64,23 +70,24 @@
             "OnePlus",
             "Lenovo",
             "Xiaomi"});
-            this.marcaBox.Location = new System.Drawing.Point(12, 47);
+            this.marcaBox.Location = new System.Drawing.Point(12, 25);
             this.marcaBox.Name = "marcaBox";
             this.marcaBox.Size = new System.Drawing.Size(169, 21);
             this.marcaBox.TabIndex = 2;
             // 
             // textBoxModelo
             // 
-            this.textBoxModelo.Location = new System.Drawing.Point(187, 47);
+            this.textBoxModelo.Location = new System.Drawing.Point(187, 26);
             this.textBoxModelo.Name = "textBoxModelo";
             this.textBoxModelo.Size = new System.Drawing.Size(204, 20);
             this.textBoxModelo.TabIndex = 3;
             // 
             // buscar_button
             // 
-            this.buscar_button.Location = new System.Drawing.Point(397, 44);
+            this.buscar_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buscar_button.Location = new System.Drawing.Point(769, 24);
             this.buscar_button.Name = "buscar_button";
-            this.buscar_button.Size = new System.Drawing.Size(75, 23);
+            this.buscar_button.Size = new System.Drawing.Size(85, 24);
             this.buscar_button.TabIndex = 4;
             this.buscar_button.Text = "Buscar";
             this.buscar_button.UseVisualStyleBackColor = true;
@@ -88,8 +95,9 @@
             // 
             // checkBoxAmazon
             // 
+            this.checkBoxAmazon.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.checkBoxAmazon.AutoSize = true;
-            this.checkBoxAmazon.Location = new System.Drawing.Point(29, 91);
+            this.checkBoxAmazon.Location = new System.Drawing.Point(516, 8);
             this.checkBoxAmazon.Name = "checkBoxAmazon";
             this.checkBoxAmazon.Size = new System.Drawing.Size(64, 17);
             this.checkBoxAmazon.TabIndex = 5;
@@ -98,8 +106,9 @@
             // 
             // checkBoxFnac
             // 
+            this.checkBoxFnac.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.checkBoxFnac.AutoSize = true;
-            this.checkBoxFnac.Location = new System.Drawing.Point(29, 114);
+            this.checkBoxFnac.Location = new System.Drawing.Point(516, 31);
             this.checkBoxFnac.Name = "checkBoxFnac";
             this.checkBoxFnac.Size = new System.Drawing.Size(50, 17);
             this.checkBoxFnac.TabIndex = 6;
@@ -108,8 +117,9 @@
             // 
             // checkBoxPCComp
             // 
+            this.checkBoxPCComp.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.checkBoxPCComp.AutoSize = true;
-            this.checkBoxPCComp.Location = new System.Drawing.Point(29, 137);
+            this.checkBoxPCComp.Location = new System.Drawing.Point(516, 54);
             this.checkBoxPCComp.Name = "checkBoxPCComp";
             this.checkBoxPCComp.Size = new System.Drawing.Size(105, 17);
             this.checkBoxPCComp.TabIndex = 7;
@@ -118,15 +128,24 @@
             // 
             // listResultView
             // 
+            this.listResultView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listResultView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnaProducto,
             this.columnaPrecioActual,
             this.columnaPrecioOriginal,
+            this.columnaPrecioAmazon,
+            this.columnaPrecioOriginalAmazon,
+            this.columnaPrecioFnac,
+            this.columnaPrecioOriginalFnac,
+            this.columnaPrecioPC,
+            this.columnaPrecioOriginalPC,
             this.columnaWeb});
             this.listResultView.HideSelection = false;
-            this.listResultView.Location = new System.Drawing.Point(228, 80);
+            this.listResultView.Location = new System.Drawing.Point(12, 74);
             this.listResultView.Name = "listResultView";
-            this.listResultView.Size = new System.Drawing.Size(507, 358);
+            this.listResultView.Size = new System.Drawing.Size(984, 381);
             this.listResultView.TabIndex = 8;
             this.listResultView.UseCompatibleStateImageBehavior = false;
             this.listResultView.View = System.Windows.Forms.View.Details;
@@ -134,26 +153,27 @@
             // columnaProducto
             // 
             this.columnaProducto.Text = "Producto";
-            this.columnaProducto.Width = 125;
+            this.columnaProducto.Width = 130;
             // 
             // columnaPrecioActual
             // 
-            this.columnaPrecioActual.Text = "PrecioActual";
-            this.columnaPrecioActual.Width = 125;
+            this.columnaPrecioActual.Text = "Mejor Precio";
+            this.columnaPrecioActual.Width = 100;
             // 
             // columnaPrecioOriginal
             // 
-            this.columnaPrecioOriginal.Text = "PrecioOriginal";
-            this.columnaPrecioOriginal.Width = 125;
+            this.columnaPrecioOriginal.Text = "Precio Original";
+            this.columnaPrecioOriginal.Width = 100;
             // 
-            // columnaWeb
+            // columnaPrecioAmazon
             // 
-            this.columnaWeb.Text = "Web";
-            this.columnaWeb.Width = 125;
+            this.columnaPrecioAmazon.Text = "Amazon";
+            this.columnaPrecioAmazon.Width = 75;
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(660, 44);
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearButton.Location = new System.Drawing.Point(921, 26);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 9;
@@ -164,7 +184,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(12, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 12;
@@ -173,18 +193,48 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(193, 31);
+            this.label2.Location = new System.Drawing.Point(184, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Modelo";
+            // 
+            // columnaPrecioOriginalAmazon
+            // 
+            this.columnaPrecioOriginalAmazon.Text = "Original Amazon";
+            this.columnaPrecioOriginalAmazon.Width = 100;
+            // 
+            // columnaPrecioFnac
+            // 
+            this.columnaPrecioFnac.Text = "Fnac";
+            this.columnaPrecioFnac.Width = 75;
+            // 
+            // columnaPrecioOriginalFnac
+            // 
+            this.columnaPrecioOriginalFnac.Text = "Original Fnac";
+            this.columnaPrecioOriginalFnac.Width = 100;
+            // 
+            // columnaPrecioPC
+            // 
+            this.columnaPrecioPC.Text = "PCComponentes";
+            this.columnaPrecioPC.Width = 100;
+            // 
+            // columnaPrecioOriginalPC
+            // 
+            this.columnaPrecioOriginalPC.Text = "Original PCComponentes";
+            this.columnaPrecioOriginalPC.Width = 100;
+            // 
+            // columnaWeb
+            // 
+            this.columnaWeb.Text = "Web";
+            this.columnaWeb.Width = 100;
             // 
             // FormularioBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1008, 473);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clearButton);
@@ -215,10 +265,16 @@
         private System.Windows.Forms.ColumnHeader columnaProducto;
         private System.Windows.Forms.ColumnHeader columnaPrecioActual;
         private System.Windows.Forms.ColumnHeader columnaPrecioOriginal;
-        private System.Windows.Forms.ColumnHeader columnaWeb;
+        private System.Windows.Forms.ColumnHeader columnaPrecioAmazon;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader columnaPrecioOriginalAmazon;
+        private System.Windows.Forms.ColumnHeader columnaPrecioFnac;
+        private System.Windows.Forms.ColumnHeader columnaPrecioOriginalFnac;
+        private System.Windows.Forms.ColumnHeader columnaPrecioPC;
+        private System.Windows.Forms.ColumnHeader columnaPrecioOriginalPC;
+        private System.Windows.Forms.ColumnHeader columnaWeb;
     }
 }
 

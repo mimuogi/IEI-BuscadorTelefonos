@@ -38,18 +38,27 @@ namespace IEI_TelefonosBuscar
             if (checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
             if (checkBoxPCComp.Checked) listaResultados.AddRange(PCComponentesManager.Buscar(marca, modelo));
 
-            listaResultadosComparados =  Comparador.Procesar(listaResultados);
-
+            listaResultadosComparados =  Comparador.Procesar(listaResultados, marca, modelo);
+            
             foreach (TelefonoComparado resultado in listaResultadosComparados)
             {
                 if (pasaFiltro(resultado.Nombre))
                 {
-                    string[] listViewItem = { resultado.Nombre, resultado.PrecioPrincipal.ToString() + "€", resultado.PrecioOriginalPrincipal.ToString() + "€", resultado.WebPrincipal };
+                    string[] listViewItem = { resultado.Nombre, 
+                        Comparador.PrecioToString(resultado.PrecioPrincipal),
+                        Comparador.PrecioToString(resultado.PrecioOriginalPrincipal),
+                        Comparador.PrecioToString(resultado.PrecioAmazon),
+                        Comparador.PrecioToString(resultado.PrecioOriginalAmazon),
+                        Comparador.PrecioToString(resultado.PrecioFnac),
+                        Comparador.PrecioToString(resultado.PrecioOriginalFnac),
+                        Comparador.PrecioToString(resultado.PrecioPCComponentes),
+                        Comparador.PrecioToString(resultado.PrecioOriginalPCComponentes),
+                        resultado.WebPrincipal };
                     listResultView.Items.Add(new ListViewItem(listViewItem));
                 }
             }
 
-            driver.Quit();
+            try { driver.Quit(); } catch (Exception) { }
         }
 
         private void clearButton_Click(object sender, EventArgs e)

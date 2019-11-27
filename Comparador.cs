@@ -10,9 +10,11 @@ namespace IEI_TelefonosBuscar
 {
     class Comparador
     {
-       public static List<TelefonoComparado> Procesar(List<Telefono> listaTelefonos)
+        private static List<TelefonoComparado> listaTelefonosComparados;
+
+        public static List<TelefonoComparado> Procesar(List<Telefono> listaTelefonos, string marca, string modelo)
         {
-            List<TelefonoComparado> listaTelefonosComparados = new List<TelefonoComparado>();
+            listaTelefonosComparados = new List<TelefonoComparado>();
             double precio;
             double precioOriginal;
             string precioString;
@@ -31,11 +33,38 @@ namespace IEI_TelefonosBuscar
                 precio = double.Parse(precioString, usCulture.NumberFormat);
                 precioOriginal = double.Parse(precioOriginalString, usCulture.NumberFormat);
 
+
                 TelefonoComparado nuevoTelefono = new TelefonoComparado(telefono.Nombre);
 
-                nuevoTelefono.PrecioPrincipal = precio;
-                nuevoTelefono.PrecioOriginalPrincipal = precioOriginal;
-                nuevoTelefono.WebPrincipal = telefono.Web;
+                Predicate<TelefonoComparado> nombreTelefono = (TelefonoComparado t) => { return t.Nombre == telefono.Nombre; };
+                Predicate<TelefonoComparado> precioOriginalABuscar = (TelefonoComparado t) => { return t.PrecioOriginalPrincipal == precioOriginal; };
+
+                if (!listaTelefonosComparados.Exists(nombreTelefono))
+                {
+                    if (!listaTelefonosComparados.Exists(precioOriginalABuscar))
+                    {
+                        nuevoTelefono = new TelefonoComparado(telefono.Nombre);
+                    }
+                    else 
+                    {
+                        nuevoTelefono = listaTelefonosComparados.Find(precioOriginalABuscar);
+                        listaTelefonosComparados.Remove(nuevoTelefono);
+
+                        nuevoTelefono.Nombre = marca.ToUpper() + " " + modelo.ToUpper() + " Comparado";
+                    }
+                }
+                else 
+                {
+                    nuevoTelefono = listaTelefonosComparados.Find(nombreTelefono);
+                    listaTelefonosComparados.Remove(nuevoTelefono);
+                }
+
+                if (nuevoTelefono.PrecioPrincipal.ToString().Contains("NaN") || nuevoTelefono.PrecioPrincipal > precio)
+                {
+                    nuevoTelefono.PrecioPrincipal = precio;
+                    nuevoTelefono.PrecioOriginalPrincipal = precioOriginal;
+                    nuevoTelefono.WebPrincipal = telefono.Web;
+                }
 
                 switch (telefono.Web)
                 {
@@ -47,7 +76,6 @@ namespace IEI_TelefonosBuscar
                     case "Fnac":
                         nuevoTelefono.PrecioFnac = precio;
                         nuevoTelefono.PrecioOriginalFnac = precioOriginal;
-
                         break;
 
                     case "PCComponentes":
@@ -56,8 +84,8 @@ namespace IEI_TelefonosBuscar
 
                         break;
                 }
-
                 listaTelefonosComparados.Add(nuevoTelefono);
+
             }
 
             listaTelefonosComparados.Sort();
@@ -74,6 +102,12 @@ namespace IEI_TelefonosBuscar
             resultado = resultado.Replace(",", ".");
 
             return resultado;
+        }
+
+        public static string PrecioToString(double precio) 
+        {
+            if (precio.ToString().Equals("NaN")) return string.Empty;
+            else { return precio.ToString() + "€"; }
         }
     }
 }

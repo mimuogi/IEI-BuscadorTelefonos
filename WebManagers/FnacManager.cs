@@ -27,10 +27,17 @@ namespace IEI_TelefonosBuscar.WebManagers
             cajaBusqueda.SendKeys(marca + " " + modelo);
             cajaBusqueda.Submit();
 
-            ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.CssSelector("span[data-category='8!1,8020!2']"));
-
-            IWebElement smartphoneCheck = driver.FindElement(By.CssSelector("span[data-category='8!1,8020!2']"));
-            smartphoneCheck.Click();
+            try
+            {
+                ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.CssSelector("span[data-category='8!1,8020!2']"));
+                IWebElement smartphoneCheck = driver.FindElement(By.CssSelector("span[data-category='8!1,8020!2']"));
+                smartphoneCheck.Click();
+            }
+            catch (Exception) 
+            { 
+                driver.Quit();
+                return telefonos;
+            }
 
             ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 10), By.ClassName("Article-item"));
 
@@ -42,34 +49,56 @@ namespace IEI_TelefonosBuscar.WebManagers
                 string precioActual = string.Empty;
                 string precioOriginal = string.Empty;
 
-                try {
-                     precioActual = elemento.FindElement(By.CssSelector("span[class='price']")).Text;
+                try
+                { 
+                     precioActual = elemento.FindElement(By.XPath("//*[contains(@class, 'price')]")).Text;
                 }
-                catch (Exception ) {
+                catch (Exception) {
                     try
                     {
-                        precioActual = elemento.FindElement(By.CssSelector("strong[class='userPrice']")).Text;
+                        precioActual = elemento.FindElement(By.XPath("//*[contains(@class, 'userPrice')]")).Text; 
                     }
-                    catch (Exception) { 
-                    
+                    catch (Exception) 
+                    {
+
                     }
                 }
                 try
                 {
-                    precioOriginal = elemento.FindElement(By.CssSelector("del[class='oldPrice']")).Text;
+                    precioActual = elemento.FindElement(By.XPath("//*[contains(@class, 'oldPrice')]")).Text;
                 }
                 catch (Exception)
                 {
                     precioOriginal = precioActual;
                 }
 
+                if (precioOriginal.Equals(string.Empty)) precioOriginal = precioActual;
+                
+                    if (pasaFiltroNombre(nombre, marca, modelo)) 
+                { 
                 Telefono tlf = new Telefono(nombre, precioActual, precioOriginal, web);
                 telefonos.Add(tlf);
+                }
             }
 
             driver.Quit();
 
             return telefonos;
+        }
+
+        private static bool pasaFiltroNombre(string nombre, string marca, string modelo)
+        {
+            bool pasaFiltro = true;
+            string nombreProducto = nombre.ToLower();
+            string nombreMarca = marca.ToLower();
+            string nombreModelo = modelo.ToLower();
+
+            if (!nombreProducto.Contains(nombreMarca) || !nombreProducto.Contains(nombreModelo))
+            {
+                pasaFiltro = false;
+            }
+
+            return pasaFiltro;
         }
     }
 }

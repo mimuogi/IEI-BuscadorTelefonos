@@ -32,8 +32,8 @@ namespace IEI_TelefonosBuscar.WebManagers
 
             ChromeConnection.WaitToAppear(driver, new TimeSpan(0, 0, 3), By.CssSelector("a[data-id='1116']"));
 
-            try {
-
+            try 
+            {
                 IWebElement smartphoneCheckBox = driver.FindElement(By.CssSelector("a[data-id='1116']"));
                 smartphoneCheckBox.Click();
                 Thread.Sleep(3000);
@@ -62,14 +62,33 @@ namespace IEI_TelefonosBuscar.WebManagers
                     precioOriginal = precioActual;
                 }
 
-                Telefono tlf = new Telefono(nombre, precioActual, precioOriginal, web);
-                telefonos.Add(tlf);
+                if(pasaFiltroNombre(nombre, marca, modelo)) 
+                {
+                    Telefono tlf = new Telefono(nombre, precioActual, precioOriginal, web);
+                    telefonos.Add(tlf);
+                }
+                
                
             }
 
             driver.Quit();
 
             return telefonos;
+        }
+
+        private static bool pasaFiltroNombre(string nombre, string marca, string modelo)
+        {
+            bool pasaFiltro = true;
+            string nombreProducto = nombre.ToLower();
+            string nombreMarca = marca.ToLower();
+            string nombreModelo = modelo.ToLower();
+
+            if (!nombreProducto.Contains(nombreMarca) || !nombreProducto.Contains(nombreModelo))
+            {
+                pasaFiltro = false;
+            }
+
+            return pasaFiltro;
         }
     }
 
