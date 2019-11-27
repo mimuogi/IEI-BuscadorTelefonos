@@ -44,16 +44,18 @@ namespace IEI_TelefonosBuscar
             {
                 if (pasaFiltro(resultado.Nombre))
                 {
-                    string[] listViewItem = { resultado.Nombre, 
+                    string[] listViewItem = 
+                        { resultado.Nombre, 
                         Comparador.PrecioToString(resultado.PrecioPrincipal),
                         Comparador.PrecioToString(resultado.PrecioOriginalPrincipal),
+                        resultado.WebPrincipal,
                         Comparador.PrecioToString(resultado.PrecioAmazon),
                         Comparador.PrecioToString(resultado.PrecioOriginalAmazon),
                         Comparador.PrecioToString(resultado.PrecioFnac),
                         Comparador.PrecioToString(resultado.PrecioOriginalFnac),
                         Comparador.PrecioToString(resultado.PrecioPCComponentes),
-                        Comparador.PrecioToString(resultado.PrecioOriginalPCComponentes),
-                        resultado.WebPrincipal };
+                        Comparador.PrecioToString(resultado.PrecioOriginalPCComponentes)
+                        };
                     listResultView.Items.Add(new ListViewItem(listViewItem));
                 }
             }

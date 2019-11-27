@@ -38,18 +38,18 @@
             this.checkBoxPCComp = new System.Windows.Forms.CheckBox();
             this.listResultView = new System.Windows.Forms.ListView();
             this.columnaProducto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnaPrecioActual = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaMejorPrecio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioOriginal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnaWeb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioAmazon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clearButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.columnaPrecioOriginalAmazon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioFnac = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioOriginalFnac = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnaPrecioOriginalPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnaWeb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clearButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -133,15 +133,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listResultView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnaProducto,
-            this.columnaPrecioActual,
+            this.columnaMejorPrecio,
             this.columnaPrecioOriginal,
+            this.columnaWeb,
             this.columnaPrecioAmazon,
             this.columnaPrecioOriginalAmazon,
             this.columnaPrecioFnac,
             this.columnaPrecioOriginalFnac,
             this.columnaPrecioPC,
-            this.columnaPrecioOriginalPC,
-            this.columnaWeb});
+            this.columnaPrecioOriginalPC});
             this.listResultView.HideSelection = false;
             this.listResultView.Location = new System.Drawing.Point(12, 74);
             this.listResultView.Name = "listResultView";
@@ -153,22 +153,52 @@
             // columnaProducto
             // 
             this.columnaProducto.Text = "Producto";
-            this.columnaProducto.Width = 130;
+            this.columnaProducto.Width = 175;
             // 
-            // columnaPrecioActual
+            // columnaMejorPrecio
             // 
-            this.columnaPrecioActual.Text = "Mejor Precio";
-            this.columnaPrecioActual.Width = 100;
+            this.columnaMejorPrecio.Text = "Mejor Precio";
+            this.columnaMejorPrecio.Width = 80;
             // 
             // columnaPrecioOriginal
             // 
             this.columnaPrecioOriginal.Text = "Precio Original";
-            this.columnaPrecioOriginal.Width = 100;
+            this.columnaPrecioOriginal.Width = 80;
+            // 
+            // columnaWeb
+            // 
+            this.columnaWeb.Text = "Web";
+            this.columnaWeb.Width = 75;
             // 
             // columnaPrecioAmazon
             // 
             this.columnaPrecioAmazon.Text = "Amazon";
-            this.columnaPrecioAmazon.Width = 75;
+            this.columnaPrecioAmazon.Width = 80;
+            // 
+            // columnaPrecioOriginalAmazon
+            // 
+            this.columnaPrecioOriginalAmazon.Text = "Original Amazon";
+            this.columnaPrecioOriginalAmazon.Width = 90;
+            // 
+            // columnaPrecioFnac
+            // 
+            this.columnaPrecioFnac.Text = "Fnac";
+            this.columnaPrecioFnac.Width = 80;
+            // 
+            // columnaPrecioOriginalFnac
+            // 
+            this.columnaPrecioOriginalFnac.Text = "Original Fnac";
+            this.columnaPrecioOriginalFnac.Width = 90;
+            // 
+            // columnaPrecioPC
+            // 
+            this.columnaPrecioPC.Text = "PCComponentes";
+            this.columnaPrecioPC.Width = 95;
+            // 
+            // columnaPrecioOriginalPC
+            // 
+            this.columnaPrecioOriginalPC.Text = "Original PCComponentes";
+            this.columnaPrecioOriginalPC.Width = 130;
             // 
             // clearButton
             // 
@@ -198,36 +228,6 @@
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Modelo";
-            // 
-            // columnaPrecioOriginalAmazon
-            // 
-            this.columnaPrecioOriginalAmazon.Text = "Original Amazon";
-            this.columnaPrecioOriginalAmazon.Width = 100;
-            // 
-            // columnaPrecioFnac
-            // 
-            this.columnaPrecioFnac.Text = "Fnac";
-            this.columnaPrecioFnac.Width = 75;
-            // 
-            // columnaPrecioOriginalFnac
-            // 
-            this.columnaPrecioOriginalFnac.Text = "Original Fnac";
-            this.columnaPrecioOriginalFnac.Width = 100;
-            // 
-            // columnaPrecioPC
-            // 
-            this.columnaPrecioPC.Text = "PCComponentes";
-            this.columnaPrecioPC.Width = 100;
-            // 
-            // columnaPrecioOriginalPC
-            // 
-            this.columnaPrecioOriginalPC.Text = "Original PCComponentes";
-            this.columnaPrecioOriginalPC.Width = 100;
-            // 
-            // columnaWeb
-            // 
-            this.columnaWeb.Text = "Web";
-            this.columnaWeb.Width = 100;
             // 
             // FormularioBase
             // 
@@ -263,18 +263,18 @@
         private System.Windows.Forms.CheckBox checkBoxPCComp;
         private System.Windows.Forms.ListView listResultView;
         private System.Windows.Forms.ColumnHeader columnaProducto;
-        private System.Windows.Forms.ColumnHeader columnaPrecioActual;
+        private System.Windows.Forms.ColumnHeader columnaMejorPrecio;
         private System.Windows.Forms.ColumnHeader columnaPrecioOriginal;
-        private System.Windows.Forms.ColumnHeader columnaPrecioAmazon;
+        private System.Windows.Forms.ColumnHeader columnaWeb;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader columnaPrecioAmazon;
         private System.Windows.Forms.ColumnHeader columnaPrecioOriginalAmazon;
         private System.Windows.Forms.ColumnHeader columnaPrecioFnac;
         private System.Windows.Forms.ColumnHeader columnaPrecioOriginalFnac;
         private System.Windows.Forms.ColumnHeader columnaPrecioPC;
         private System.Windows.Forms.ColumnHeader columnaPrecioOriginalPC;
-        private System.Windows.Forms.ColumnHeader columnaWeb;
     }
 }
 

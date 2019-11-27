@@ -36,26 +36,26 @@ namespace IEI_TelefonosBuscar
 
                 TelefonoComparado nuevoTelefono = new TelefonoComparado(telefono.Nombre);
 
-                Predicate<TelefonoComparado> nombreTelefono = (TelefonoComparado t) => { return t.Nombre == telefono.Nombre; };
-                Predicate<TelefonoComparado> precioOriginalABuscar = (TelefonoComparado t) => { return t.PrecioOriginalPrincipal == precioOriginal; };
+                Predicate<TelefonoComparado> nombreTelefonoEnLista = (TelefonoComparado t) => { return t.Nombre == telefono.Nombre; };
+                Predicate<TelefonoComparado> precioOriginalEnLista = (TelefonoComparado t) => { return t.PrecioOriginalPrincipal == precioOriginal; };
 
-                if (!listaTelefonosComparados.Exists(nombreTelefono))
+                if (!listaTelefonosComparados.Exists(nombreTelefonoEnLista))
                 {
-                    if (!listaTelefonosComparados.Exists(precioOriginalABuscar))
+                    if (!listaTelefonosComparados.Exists(precioOriginalEnLista))
                     {
                         nuevoTelefono = new TelefonoComparado(telefono.Nombre);
                     }
                     else 
                     {
-                        nuevoTelefono = listaTelefonosComparados.Find(precioOriginalABuscar);
+                        nuevoTelefono = listaTelefonosComparados.Find(precioOriginalEnLista);
                         listaTelefonosComparados.Remove(nuevoTelefono);
 
-                        nuevoTelefono.Nombre = marca.ToUpper() + " " + modelo.ToUpper() + " Comparado";
+                        nuevoTelefono.Nombre = marca.ToUpper() + " " + modelo.ToUpper();
                     }
                 }
                 else 
                 {
-                    nuevoTelefono = listaTelefonosComparados.Find(nombreTelefono);
+                    nuevoTelefono = listaTelefonosComparados.Find(nombreTelefonoEnLista);
                     listaTelefonosComparados.Remove(nuevoTelefono);
                 }
 

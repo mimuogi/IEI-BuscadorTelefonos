@@ -51,12 +51,12 @@ namespace IEI_TelefonosBuscar.WebManagers
 
                 try
                 { 
-                     precioActual = elemento.FindElement(By.XPath("//*[contains(@class, 'price')]")).Text;
+                     precioActual = elemento.FindElement(By.CssSelector("span[class='price']")).Text;
                 }
                 catch (Exception) {
                     try
                     {
-                        precioActual = elemento.FindElement(By.XPath("//*[contains(@class, 'userPrice')]")).Text; 
+                        precioActual = elemento.FindElement(By.ClassName("userPrice")).Text;
                     }
                     catch (Exception) 
                     {
@@ -65,7 +65,7 @@ namespace IEI_TelefonosBuscar.WebManagers
                 }
                 try
                 {
-                    precioActual = elemento.FindElement(By.XPath("//*[contains(@class, 'oldPrice')]")).Text;
+                    precioActual = elemento.FindElement(By.ClassName("oldPrice")).Text;
                 }
                 catch (Exception)
                 {
