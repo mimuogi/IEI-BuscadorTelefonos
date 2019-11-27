@@ -98,7 +98,15 @@ namespace IEI_TelefonosBuscar
 
             driver = FirefoxConnection.initConnection(urlLaDonnaEMobile);
             driver.Manage().Window.Minimize();
-            driver.FindElement(By.CssSelector("button[class='ytp-large-play-button ytp-button']")).Click();
+            try
+            {
+                FirefoxConnection.WaitToAppear(driver, new TimeSpan(0, 0, 2), By.CssSelector("button[class='ytp-large-play-button ytp-button']"));
+                driver.FindElement(By.CssSelector("button[class='ytp-large-play-button ytp-button']")).Click();
+            }
+            catch 
+            {
+                driver.Quit();
+            }
 
         }
     }
