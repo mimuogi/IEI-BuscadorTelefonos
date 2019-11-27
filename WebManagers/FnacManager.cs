@@ -50,8 +50,8 @@ namespace IEI_TelefonosBuscar.WebManagers
                 string precioOriginal = string.Empty;
 
                 try
-                { 
-                     precioActual = elemento.FindElement(By.CssSelector("span[class='price']")).Text;
+                {
+                    precioActual = elemento.FindElement(By.ClassName("price'")).Text;
                 }
                 catch (Exception) {
                     try
