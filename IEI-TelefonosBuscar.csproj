@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\TelefonoComparado.cs" />
+    <Compile Include="Comparador.cs" />
     <Compile Include="Connections\ChromeConnection.cs" />
     <Compile Include="Connections\FirefoxConnection.cs" />
     <Compile Include="Data\Telefono.cs" />

@@ -20,10 +20,5 @@ namespace IEI_TelefonosBuscar.Data
             this.PrecioOriginal = precioOriginal;
             this.Web = web;
         }
-
-        public String toString()
-        {
-            return Nombre + " " + Precio + " " + PrecioOriginal + " " + Web;
-        }
     }
 }

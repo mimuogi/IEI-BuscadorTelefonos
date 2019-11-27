@@ -16,8 +16,10 @@ namespace IEI_TelefonosBuscar
 {
     public partial class FormularioBase : Form
     {
-        public static IWebDriver driver;
+        private IWebDriver driver;
         private List<Telefono> listaResultados = new List<Telefono>();
+        private List<TelefonoComparado> listaResultadosComparados = new List<TelefonoComparado>();
+
         public FormularioBase()
         {
             InitializeComponent();
@@ -36,11 +38,13 @@ namespace IEI_TelefonosBuscar
             if (checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
             if (checkBoxPCComp.Checked) listaResultados.AddRange(PCComponentesManager.Buscar(marca, modelo));
 
-            foreach (Telefono resultado in listaResultados)
+            listaResultadosComparados =  Comparador.Procesar(listaResultados);
+
+            foreach (TelefonoComparado resultado in listaResultadosComparados)
             {
                 if (pasaFiltro(resultado.Nombre))
                 {
-                    string[] listViewItem = { resultado.Nombre, resultado.Precio, resultado.PrecioOriginal, resultado.Web };
+                    string[] listViewItem = { resultado.Nombre, resultado.PrecioPrincipal.ToString() + "€", resultado.PrecioOriginalPrincipal.ToString() + "€", resultado.WebPrincipal };
                     listResultView.Items.Add(new ListViewItem(listViewItem));
                 }
             }
@@ -59,7 +63,7 @@ namespace IEI_TelefonosBuscar
             listResultView.Items.Clear();
         }
 
-        private static bool pasaFiltro(string nombre)
+        private bool pasaFiltro(string nombre)
         {
             bool pasaFiltroNombre = true;
             string nombreProducto = nombre.ToLower();
@@ -77,7 +81,7 @@ namespace IEI_TelefonosBuscar
             return pasaFiltroNombre;
         }
 
-        public static void Espectaculo() 
+        private void Espectaculo() 
         {
             string urlLaDonnaEMobile = "https://www.youtube.com/watch?v=xCFEk6Y8TmM";
 
