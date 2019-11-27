@@ -50,13 +50,15 @@ namespace IEI_TelefonosBuscar
                         nuevoTelefono = listaTelefonosComparados.Find(precioOriginalEnLista);
                         listaTelefonosComparados.Remove(nuevoTelefono);
 
-                        nuevoTelefono.Nombre = marca.ToUpper() + " " + modelo.ToUpper();
+                        //nuevoTelefono.Nombre = marca.ToUpper() + " " + modelo.ToUpper();
                     }
                 }
                 else 
                 {
                     nuevoTelefono = listaTelefonosComparados.Find(nombreTelefonoEnLista);
                     listaTelefonosComparados.Remove(nuevoTelefono);
+
+                    //nuevoTelefono.Nombre = marca.ToUpper() + " " + modelo.ToUpper();
                 }
 
                 if (nuevoTelefono.PrecioPrincipal.ToString().Contains("NaN") || nuevoTelefono.PrecioPrincipal > precio)

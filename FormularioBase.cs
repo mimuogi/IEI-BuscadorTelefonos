@@ -34,9 +34,9 @@ namespace IEI_TelefonosBuscar
 
             if (checkBoxAmazon.Checked && checkBoxFnac.Checked && checkBoxPCComp.Checked) Espectaculo();
 
-            if (checkBoxAmazon.Checked) listaResultados.AddRange(AmazonManager.Buscar(marca, modelo));
-            if (checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
             if (checkBoxPCComp.Checked) listaResultados.AddRange(PCComponentesManager.Buscar(marca, modelo));
+            if (checkBoxFnac.Checked) listaResultados.AddRange(FnacManager.Buscar(marca, modelo));
+            if (checkBoxAmazon.Checked) listaResultados.AddRange(AmazonManager.Buscar(marca, modelo));
 
             listaResultadosComparados =  Comparador.Procesar(listaResultados, marca, modelo);
             
